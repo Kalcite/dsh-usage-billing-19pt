@@ -19,7 +19,7 @@
  *
  * 缓存是纯派生数据，任何异常（损坏、权限、版本不符）都只是退回重扫，不影响正确性。
  *
- * @module dsh-usage-billing/src/cache
+ * @module dsh-usage-billing-19pt/src/cache
  */
 
 import { createHash } from 'node:crypto'
@@ -108,7 +108,7 @@ export function pricingKeyOf(pricing: unknown): string {
  */
 export function cachePathFor(home: string): string {
   const digest = createHash('sha1').update(home).digest('hex').slice(0, 12)
-  return path.join(os.tmpdir(), 'dsh-usage-billing', `overview-${digest}.json`)
+  return path.join(os.tmpdir(), 'dsh-usage-billing-19pt', `overview-${digest}.json`)
 }
 
 /**

@@ -22,7 +22,7 @@
  * （`assistant/message` 是最终的、完整的采样，而 `assistant/chunk` 可能只是流式
  * 中间态），因此既修掉了双计，又保留了「重试后取最终值」的正确语义。
  *
- * @module dsh-usage-billing/src/parse
+ * @module dsh-usage-billing-19pt/src/parse
  */
 
 import type { TokenBuckets } from './pricing.js'

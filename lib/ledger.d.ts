@@ -8,7 +8,7 @@
  * 唯一能正确应用「按时段与周末浮动」的粒度：界面把规则改动后的重算压在这一层，
  * 就可以做到改单价即时生效，而不必重新读盘。
  *
- * @module dsh-usage-billing/src/ledger
+ * @module dsh-usage-billing-19pt/src/ledger
  */
 import { type PricingRule, type TokenBuckets } from './pricing.js';
 /** 「最近调用」列表保留的条数上限。 */

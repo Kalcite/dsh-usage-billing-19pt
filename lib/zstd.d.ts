@@ -11,7 +11,7 @@
  * 逻辑与 DSH 自身的 `scanZstdFrames`（`session-persistence-jsonl/src/zstd.ts`）
  * 保持同构；这里的实现是独立的 JS 版本，不引入任何依赖。
  *
- * @module dsh-usage-billing/src/zstd
+ * @module dsh-usage-billing-19pt/src/zstd
  */
 /** zstd 帧魔数（小端读取为 `0xFD2FB528`）。 */
 export declare const ZSTD_MAGIC = 4247762216;

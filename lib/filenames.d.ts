@@ -14,7 +14,7 @@
  * > 注意：启动器参考实现（`dsh-launcher-webui/server/usage.mjs`）的正则只认到
  * > `.v2`，因此把当前 `.v4` 日志整个漏掉了——本模块用不设上限的代号匹配修正它。
  *
- * @module dsh-usage-billing/src/filenames
+ * @module dsh-usage-billing-19pt/src/filenames
  */
 /** 被识别为会话日志的文件名 → 格式代号；非日志名返回 `null`。 */
 export interface SessionLogName {

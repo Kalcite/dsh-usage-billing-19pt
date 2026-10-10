@@ -24,7 +24,7 @@
  * 静态校验：任何 `require` 都必须能由模块表回答（基线外部依赖或
  * `dsh.client.external`），从而保证不出现跨插件的值引用。
  *
- * @module dsh-usage-billing/scripts/build-client
+ * @module dsh-usage-billing-19pt/scripts/build-client
  */
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'

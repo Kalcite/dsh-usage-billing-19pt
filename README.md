@@ -1,4 +1,4 @@
-# dsh-usage-billing
+# dsh-usage-billing-19pt
 
 DeepSeek Harness 的**用量与计费**插件。扫描会话日志统计 Token 消耗，按多模型单价与峰谷时段实时算钱，并把账单做成一个看板挂进 DSH **左侧主导航栏**。
 
@@ -33,7 +33,7 @@ DeepSeek Harness 的**用量与计费**插件。扫描会话日志统计 Token �
 **窗口**（看多少天）与**右端**（看到哪一天），因此可以回看任意历史时段。
 右端在未手动调整时始终跟随最新一天。
 
-计费规则（单价、峰谷时段、周末规则、时区）全部可在 **设置 → 插件 → dsh-usage-billing** 里实时修改——那些字段都是 schemastery 的 `.volatile()` 字段，由 Loader 写回 profile patch，改完立刻重算，不需要重启。
+计费规则（单价、峰谷时段、周末规则、时区）全部可在 **设置 → 插件 → dsh-usage-billing-19pt** 里实时修改——那些字段都是 schemastery 的 `.volatile()` 字段，由 Loader 写回 profile patch，改完立刻重算，不需要重启。
 
 > 作者 **@1999Pt**（设置页表单最下方，以及看板底部都有署名）。
 
@@ -73,8 +73,8 @@ dsh plugin --profile web add <你的包名>
 ### 从源码 / 本地目录
 
 ```bash
-git clone https://github.com/Kalcite/dsh-usage-billing-19pt dsh-usage-billing
-cd dsh-usage-billing
+git clone https://github.com/Kalcite/dsh-usage-billing-19pt dsh-usage-billing-19pt
+cd dsh-usage-billing-19pt
 pnpm install
 pnpm run build          # 生成 lib/client.js 与 lib/*.js
 dsh plugin --profile web add "file:$PWD"
@@ -85,7 +85,7 @@ dsh plugin --profile web add "file:$PWD"
 ### 卸载
 
 ```bash
-dsh plugin --profile web remove dsh-usage-billing
+dsh plugin --profile web remove dsh-usage-billing-19pt
 ```
 
 > 卸载前若你做过开发用的**目录联接**，请先让 profile 指向真实目录再卸载：带联接做递归
@@ -98,7 +98,7 @@ dsh plugin --profile web remove dsh-usage-billing
 curl http://127.0.0.1:3080/usage-billing/health
 
 # 客户端产物：应返回 200 与一段 JS
-curl -I 'http://127.0.0.1:3080/plugins/??dsh-usage-billing/client.js&rev=0'
+curl -I 'http://127.0.0.1:3080/plugins/??dsh-usage-billing-19pt/client.js&rev=0'
 ```
 
 第二条的**地址形状很关键**：DSH 的客户端模块系统用**组合查询**寻址插件资源
@@ -106,7 +106,7 @@ curl -I 'http://127.0.0.1:3080/plugins/??dsh-usage-billing/client.js&rev=0'
 后者必然 404——那只是路径形状不对，不代表插件有问题。真实地址可以在页面控制台里读：
 
 ```js
-window.__DSH_BOOT__.entries.find(e => e.id === 'dsh-usage-billing')
+window.__DSH_BOOT__.entries.find(e => e.id === 'dsh-usage-billing-19pt')
 ```
 
 主机半边的自检也可用仓库自带的命令行报告（不依赖客户端插件系统）：
@@ -143,7 +143,7 @@ node bin/usage-report.mjs --port 3080
 列表只在启动时组装）：
 
 ```bash
-dsh plugin --profile desktop add dsh-usage-billing
+dsh plugin --profile desktop add dsh-usage-billing-19pt
 ```
 
 桌面 profile 由 Electron 独占，CLI 会拒绝直接启动/导出它（`profile "desktop" is
@@ -161,7 +161,7 @@ managed exclusively by the Electron application`）——上面这条是 Desktop
 
 ```yaml
 - id: usage-billing
-  name: 'dsh-usage-billing'
+  name: 'dsh-usage-billing-19pt'
   config:
     offPeakMultiplier: 0.5          # 空闲价 = 高峰价 × 该系数
     peakSlots:                      # 高峰时段（北京时间整点，含 start 不含 end）
@@ -247,7 +247,7 @@ managed exclusively by the Electron application`）——上面这条是 Desktop
 
 ```yaml
 - id: usage-billing
-  name: 'dsh-usage-billing'
+  name: 'dsh-usage-billing-19pt'
   config:
     extraHolidays:                       # 叠加在内置数据之上，不会覆盖内置
       - { name: 元旦, from: '2027-01-01', to: '2027-01-03' }
@@ -286,7 +286,7 @@ managed exclusively by the Electron application`）——上面这条是 Desktop
 
 - **「再次扫描」按钮**（看板右上角）跳过缓存，重新读取全部日志并更新缓存——这就是「更新」的入口。
 - 面板顶部会显示本次是**缓存**还是**全量扫描**，以及加载时间。
-- 缓存放在系统临时目录（`%TEMP%/dsh-usage-billing/overview-<数据目录哈希>.json`），
+- 缓存放在系统临时目录（`%TEMP%/dsh-usage-billing-19pt/overview-<数据目录哈希>.json`），
   按数据目录区分；它是纯派生数据，**删掉只是重扫一次**，任何损坏/权限问题都会自动退回扫描。
 - 改了单价或峰谷规则会让缓存自然失效（计费规则参与缓存键），无需手动清理。
 
@@ -405,7 +405,7 @@ DSH 的官方客户端打包预设（`packages/client/tsdown.client.ts`）**不�
 
 ```js
 window.__ModuleLoader__.load({
-  id: "dsh-usage-billing",
+  id: "dsh-usage-billing-19pt",
   factory: (require) => {
     var module = { exports: {} };
     var exports = module.exports;
@@ -429,6 +429,23 @@ npm 上的 `dsh-usage-billing`（0.9.5，维护者 `ohmyrika`）是**另一套�
 `llm/stream`、把统计写进 `.dsh-usage-billing.json`，带预算告警 / 官方余额拉取 / 中英双语 /
 `usage_billing` 动态工具，界面是「侧边栏卡片 + 弹窗 + 设置页 → 用量统计」。本包是**扫日志**的实现
 （读 `$DSH_HOME/sessions` 下的 zstd 会话日志），看板挂在左侧主导航栏。
+
+### 命名：包名带 `-19pt`，但有两处刻意不变
+
+| 名字 | 值 | 说明 |
+| --- | --- | --- |
+| 包名 | `dsh-usage-billing-19pt` | 与 npm 上那套同名插件彻底分开。它同时是**客户端模块 id**（`window.__ModuleLoader__.load({ id })`），由构建脚本从 `package.json` 的 `name` 自动取用，因此改名只需改一处 |
+| patch 行 `name` | `dsh-usage-billing-19pt` | 必须与包名一致，DSH 才能按名字装载这一行 |
+| patch 行 `id` | **`usage-billing`（不变）** | 它是 `ctx.settings` 的命名空间。改了会让已保存的单价 / 峰谷规则失配 |
+| HTTP 路由前缀 | **`/usage-billing`（不变）** | 这是 URL 路径而不是包名。改它要同时动 `ROUTE_PREFIX`、浏览器半边的取数地址与 `bin/usage-report.mjs`，会让既有书签与脚本失效——需要的话说一声 |
+| localStorage 键 | `dsh-usage-billing-19pt.cards` | 卡片显示项的偏好，换名后需要重新勾一次 |
+| 缓存目录 | `%TEMP%/dsh-usage-billing-19pt/` | 换名后首次打开会重扫一次（约半秒），之后照旧走缓存 |
+
+> ⚠️ 路由前缀仍然是 `/usage-billing`，所以本插件与 0.9.5 **依然不能同时安装**。
+
+> 🔁 **改名后要清一次旧的依赖项。** profile 的 `dependencies` 是按**包名**记录的，包名不同
+> 不会自动覆盖：如果那里还留着 `dsh-usage-billing`（0.9.5，或本包改名前的记录），请先
+> `dsh plugin --profile <profile> remove dsh-usage-billing`，再装 `dsh-usage-billing-19pt`。
 
 两者只是重名，代码没有共同来源。本包借鉴了它的**卡片视觉口径**（1px 细边框 + 分层底色 +
 8px 圆角、金额蓝 `#60a5fa`、8px 比例条），并修掉了它导出路由的故障：

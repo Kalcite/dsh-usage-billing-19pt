@@ -14,7 +14,7 @@
  * 全局（例如 jsdom 渲染测试把 `globalThis.fetch` 换成桩）会污染另一个正在跑的
  * 文件的 HTTP 断言。症状很有迷惑性：每个文件单独跑全绿，进套件后集体失败。
  *
- * @module dsh-usage-billing/scripts/run-tests
+ * @module dsh-usage-billing-19pt/scripts/run-tests
  */
 
 import { readdirSync } from 'node:fs'

@@ -1,5 +1,5 @@
 /**
- * dsh-usage-billing 主机侧插件。
+ * dsh-usage-billing-19pt 主机侧插件。
  *
  * 组成：
  *   - `Config`：计费规则。全部字段标记 `.volatile()`，因此在 Settings 的
@@ -15,7 +15,7 @@
  * > without an enclosing volatile field`）。因此 `peakSlots` / `models` 是
  * > volatile 的数组 / 字典，元素本身不标 volatile。
  *
- * @module dsh-usage-billing
+ * @module dsh-usage-billing-19pt
  */
 import type { Context, Volatile } from '@deepseek-ai/cordis';
 import z from '@deepseek-ai/schemastery';
@@ -31,7 +31,7 @@ export type { ParsedSessionLog, UsageSample } from './parse.js';
 export { parseSessionLogName, pickSessionLog, projectDisplayName } from './filenames.js';
 export { decodeSessionLog, scanZstdFrames } from './zstd.js';
 /** 插件在 cordis.yml 里的行名。 */
-export declare const name = "dsh-usage-billing";
+export declare const name = "dsh-usage-billing-19pt";
 /** 路由前缀；浏览器半边按同一常量拼接请求地址。 */
 export declare const ROUTE_PREFIX = "/usage-billing";
 /**

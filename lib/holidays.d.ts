@@ -36,7 +36,7 @@
  * 明确告知用户的行为，因此 `holidayCalendarCoverage()` 会报告覆盖区间，界面与
  * `/usage-billing/health` 都会显示它。
  *
- * @module dsh-usage-billing/src/holidays
+ * @module dsh-usage-billing-19pt/src/holidays
  */
 /** 一段连续的休假日。 */
 export interface HolidayRange {

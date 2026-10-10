@@ -16,13 +16,13 @@
  *
  * 颜色优先走 DSH 主题变量（并保留一层旧变量名与硬编码兜底），因此跟随明/暗主题。
  *
- * @module dsh-usage-billing/src/client/styles
+ * @module dsh-usage-billing-19pt/src/client/styles
  */
 
 'use strict'
 
 /** style 标签的唯一标识，保证热重载时不会重复注入。 */
-const STYLE_TAG_ID = 'dsh-usage-billing/panel.css'
+const STYLE_TAG_ID = 'dsh-usage-billing-19pt/panel.css'
 
 /** 面板样式文本。 */
 const PANEL_CSS = `

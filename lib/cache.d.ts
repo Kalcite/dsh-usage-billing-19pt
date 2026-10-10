@@ -19,7 +19,7 @@
  *
  * 缓存是纯派生数据，任何异常（损坏、权限、版本不符）都只是退回重扫，不影响正确性。
  *
- * @module dsh-usage-billing/src/cache
+ * @module dsh-usage-billing-19pt/src/cache
  */
 import { type UsageOverview } from './ledger.js';
 /** 缓存格式版本；结构变化时递增即可让旧缓存自然失效。 */

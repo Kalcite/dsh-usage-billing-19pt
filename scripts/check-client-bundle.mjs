@@ -19,7 +19,7 @@ console.log('  last         :', lastLine)
 assert.equal(firstLine, 'window.__ModuleLoader__.load({', 'banner must open the loader registration')
 assert.equal(secondToLast, '\t\treturn module.exports;', 'factory must return its exports')
 assert.equal(lastLine, '\t} });', 'footer must close factory + loader call')
-assert.ok(source.includes('id: "dsh-usage-billing"'), 'id must be the exact package name')
+assert.ok(source.includes('id: "dsh-usage-billing-19pt"'), 'id must be the exact package name')
 console.log('  OK    : banner/footer/id match the official preset')
 
 console.log('\n=== 2. syntax check ===')
@@ -63,7 +63,7 @@ vm.runInContext(source, sandbox, { filename: 'lib/client.js' })
 
 assert.ok(registered !== null, 'the bundle must call window.__ModuleLoader__.load')
 console.log('  registered id :', registered.id)
-assert.equal(registered.id, 'dsh-usage-billing')
+assert.equal(registered.id, 'dsh-usage-billing-19pt')
 
 const requireShim = createRequire(import.meta.url)
 const exportsObj = registered.factory((spec) => {

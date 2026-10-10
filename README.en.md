@@ -1,4 +1,4 @@
-# dsh-usage-billing
+# dsh-usage-billing-19pt
 
 Token usage and billing for **DeepSeek Harness**. It scans DSH session logs, computes token consumption, prices it against a multi-model rate table with peak / off-peak windows, and renders the bill as a page in the DSH **left sidebar navigation**.
 
@@ -39,25 +39,25 @@ The window control offers presets (last 30 / 90 / 180 days, all) plus two slider
 **window** (how many days) and **right edge** (which day to end on), so any historical
 range is reachable. Until you move it, the right edge tracks the newest day.
 
-Every pricing rule (rates, peak windows, weekend rule, timezone) is editable live at **Settings → Plugins → dsh-usage-billing**. Those fields are schemastery `.volatile()` fields, so the Loader persists them into the profile patch and the bill recomputes immediately — no restart.
+Every pricing rule (rates, peak windows, weekend rule, timezone) is editable live at **Settings → Plugins → dsh-usage-billing-19pt**. Those fields are schemastery `.volatile()` fields, so the Loader persists them into the profile patch and the bill recomputes immediately — no restart.
 
 ---
 
 ## Install
 
 ```bash
-dsh plugin --profile web add dsh-usage-billing
+dsh plugin --profile web add dsh-usage-billing-19pt
 ```
 
-Substitute the profile you actually run (`dsh plugin --profile desktop add dsh-usage-billing` for the desktop profile). The command installs the package into that profile's `node_modules`, adds it to the profile `package.json` `dependencies`, and — because the package declares `dsh.bundle.patch` — appends it to `dsh.profile.bundles` so its `cordis.patch.yml` is merged at next boot. **No profile file needs manual editing.**
+Substitute the profile you actually run (`dsh plugin --profile desktop add dsh-usage-billing-19pt` for the desktop profile). The command installs the package into that profile's `node_modules`, adds it to the profile `package.json` `dependencies`, and — because the package declares `dsh.bundle.patch` — appends it to `dsh.profile.bundles` so its `cordis.patch.yml` is merged at next boot. **No profile file needs manual editing.**
 
 Restart DSH, then click **用量计费** in the left sidebar.
 
 ### From source
 
 ```bash
-git clone <this repo> dsh-usage-billing
-cd dsh-usage-billing
+git clone <this repo> dsh-usage-billing-19pt
+cd dsh-usage-billing-19pt
 pnpm install
 pnpm run build          # emits lib/client.js and lib/*.js
 dsh plugin --profile web add "file:$PWD"
@@ -72,7 +72,7 @@ dsh plugin --profile web add "file:$PWD"
 curl http://127.0.0.1:3080/usage-billing/health
 
 # Client artifact: should return 200 and a JS body
-curl -I 'http://127.0.0.1:3080/plugins/??dsh-usage-billing/client.js&rev=0'
+curl -I 'http://127.0.0.1:3080/plugins/??dsh-usage-billing-19pt/client.js&rev=0'
 ```
 
 The **URL shape matters**: the client module system addresses plugin resources with a
@@ -81,7 +81,7 @@ The latter always 404s — that is a wrong path shape, not a broken plugin. Read
 URL from the page console:
 
 ```js
-window.__DSH_BOOT__.entries.find(e => e.id === 'dsh-usage-billing')
+window.__DSH_BOOT__.entries.find(e => e.id === 'dsh-usage-billing-19pt')
 ```
 
 A CLI report that needs no client-plugin system is also included:
@@ -103,7 +103,7 @@ Every field has a default, so **no configuration is required** (the defaults are
 
 ```yaml
 - id: usage-billing
-  name: 'dsh-usage-billing'
+  name: 'dsh-usage-billing-19pt'
   config:
     offPeakMultiplier: 0.5          # off-peak = peak × this factor
     peakSlots:                      # Beijing time, whole hours, start inclusive / end exclusive
@@ -169,7 +169,7 @@ Precedence, highest first: **statutory holiday → makeup workday → weekend �
 
 ```yaml
 - id: usage-billing
-  name: 'dsh-usage-billing'
+  name: 'dsh-usage-billing-19pt'
   config:
     extraHolidays:                       # appended on top of the built-in data
       - { name: 'New Year', from: '2027-01-01', to: '2027-01-03' }
@@ -202,7 +202,7 @@ A hit requires both the log *fingerprint* (count + total bytes + newest mtime) a
   and refreshes the cache — that is the "update" entry point.
 - The panel header states whether this load came from **cache** or a **full scan**, with its timestamp.
 - The cache lives in the system temp directory
-  (`%TEMP%/dsh-usage-billing/overview-<hash-of-data-dir>.json`), keyed by data directory. It is
+  (`%TEMP%/dsh-usage-billing-19pt/overview-<hash-of-data-dir>.json`), keyed by data directory. It is
   pure derived data: **deleting it just costs one rescan**, and any corruption or permission
   problem falls back to scanning.
 - Changing rates or peak windows invalidates it naturally (the pricing rule is part of the
@@ -293,7 +293,7 @@ DSH's official client bundling preset (`packages/client/tsdown.client.ts`) **is 
 
 ```js
 window.__ModuleLoader__.load({
-  id: "dsh-usage-billing",
+  id: "dsh-usage-billing-19pt",
   factory: (require) => {
     var module = { exports: {} };
     var exports = module.exports;
@@ -355,7 +355,7 @@ system and the slots this plugin uses (verified: `dsh-client-modules`,
 list is only composed at startup):
 
 ```bash
-dsh plugin --profile desktop add dsh-usage-billing
+dsh plugin --profile desktop add dsh-usage-billing-19pt
 ```
 
 The desktop profile is owned exclusively by Electron, so the plain CLI refuses to boot or

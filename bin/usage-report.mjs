@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * dsh-usage-billing 命令行用量报告。
+ * dsh-usage-billing-19pt 命令行用量报告。
  *
  * 用途：当 DSH 客户端插件系统不可用（设置页里看不到「用量计费」）时，直接读取
  * 主机半边已经算好的聚合结果并打印成文本报表——数据与看板完全同源。
@@ -11,7 +11,7 @@
  *   node bin/usage-report.mjs --json             # 输出原始 JSON
  *   node bin/usage-report.mjs --days 30          # 明细天数（默认 30）
  *
- * @module dsh-usage-billing/bin/usage-report
+ * @module dsh-usage-billing-19pt/bin/usage-report
  */
 
 const args = process.argv.slice(2)
@@ -85,7 +85,7 @@ async function main() {
     response = await fetch(url)
   } catch (error) {
     console.error(`无法连接 ${url}`)
-    console.error('请确认 DSH 正在运行，且 dsh-usage-billing 已装载到当前 profile。')
+    console.error('请确认 DSH 正在运行，且 dsh-usage-billing-19pt 已装载到当前 profile。')
     console.error(String(error?.message ?? error))
     process.exitCode = 1
     return
@@ -182,7 +182,7 @@ async function main() {
   }
 
   console.log(`\n${line}`)
-  console.log('提示：入口在左侧导航栏「用量计费」；改单价 / 峰谷规则 → 设置 → 插件 → dsh-usage-billing，')
+  console.log('提示：入口在左侧导航栏「用量计费」；改单价 / 峰谷规则 → 设置 → 插件 → dsh-usage-billing-19pt，')
   console.log('      或直接改 profile 的 cordis.patch.yml 里 id: usage-billing 那一行。')
   console.log(line)
 }

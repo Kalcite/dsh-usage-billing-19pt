@@ -135,7 +135,7 @@ function getWithHost(port, path, host) {
 /* ---------------------------------------------------------------- 用例 */
 
 test('插件导出面符合 DSH 主机插件契约', () => {
-  assert.equal(plugin.name, 'dsh-usage-billing')
+  assert.equal(plugin.name, 'dsh-usage-billing-19pt')
   assert.deepEqual(plugin.inject, ['webServer'])
   assert.equal(typeof plugin.apply, 'function')
   assert.equal(typeof Config, 'function', 'Config 必须是 schemastery schema（可 new）')

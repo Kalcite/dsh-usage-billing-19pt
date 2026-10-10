@@ -1,5 +1,5 @@
 /**
- * dsh-usage-billing 主机侧插件。
+ * dsh-usage-billing-19pt 主机侧插件。
  *
  * 组成：
  *   - `Config`：计费规则。全部字段标记 `.volatile()`，因此在 Settings 的
@@ -15,7 +15,7 @@
  * > without an enclosing volatile field`）。因此 `peakSlots` / `models` 是
  * > volatile 的数组 / 字典，元素本身不标 volatile。
  *
- * @module dsh-usage-billing
+ * @module dsh-usage-billing-19pt
  */
 
 import type { Context, Volatile } from '@deepseek-ai/cordis'
@@ -60,7 +60,7 @@ export { parseSessionLogName, pickSessionLog, projectDisplayName } from './filen
 export { decodeSessionLog, scanZstdFrames } from './zstd.js'
 
 /** 插件在 cordis.yml 里的行名。 */
-export const name = 'dsh-usage-billing'
+export const name = 'dsh-usage-billing-19pt'
 
 /** 路由前缀；浏览器半边按同一常量拼接请求地址。 */
 export const ROUTE_PREFIX = '/usage-billing'
@@ -162,7 +162,7 @@ export const Config = z.object({
   })).default([]).volatile(),
   extraMakeupWorkdays: z.array(z.string())
     // 这一行刻意留在这里：它是设置表单的最后一个字段，description 会渲染在
-    // 「设置 → 插件 → dsh-usage-billing」的最下方。
+    // 「设置 → 插件 → dsh-usage-billing-19pt」的最下方。
     .description('补充的调休上班日（YYYY-MM-DD，叠加在内置 2026 年数据之上）。'
       + '计费口径：调休上班的周末（即所有周末）与中国法定节假日全天均按空闲时段计费。'
       + '—— 作者 @1999Pt')
@@ -318,7 +318,7 @@ export function apply(ctx: Context, config: Config): void {
       ) {
         memo = { at: now, home, pricingKey, value: cached.overview }
         lastSource = 'cache'
-        logger?.info?.('dsh-usage-billing: 命中磁盘缓存（扫描于 %s）', new Date(cached.writtenAt).toLocaleString())
+        logger?.info?.('dsh-usage-billing-19pt: 命中磁盘缓存（扫描于 %s）', new Date(cached.writtenAt).toLocaleString())
         return { value: cached.overview, source: 'cache' }
       }
     }
@@ -413,12 +413,12 @@ export function apply(ctx: Context, config: Config): void {
         }
         writeJson(res, 404, { ok: false, error: `unknown route: ${route}` })
       } catch (error) {
-        logger?.warn?.('dsh-usage-billing: 生成用量总览失败')
+        logger?.warn?.('dsh-usage-billing-19pt: 生成用量总览失败')
         logger?.warn?.(error)
         writeJson(res, 500, { ok: false, error: error instanceof Error ? error.message : String(error) })
       }
     },
-  }), 'dsh-usage-billing: usage route')
+  }), 'dsh-usage-billing-19pt: usage route')
 
-  logger?.info?.('dsh-usage-billing: 已挂载 %s（数据目录 %s）', ROUTE_PREFIX, activeHome())
+  logger?.info?.('dsh-usage-billing-19pt: 已挂载 %s（数据目录 %s）', ROUTE_PREFIX, activeHome())
 }

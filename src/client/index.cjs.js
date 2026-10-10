@@ -19,7 +19,7 @@
  *
  * 数据全部来自本插件主机半边的只读 JSON 路由，不读取任何其它插件的代码。
  *
- * @module dsh-usage-billing/client
+ * @module dsh-usage-billing-19pt/client
  */
 
 'use strict'
@@ -89,7 +89,7 @@ function apply(ctx) {
       key: PANEL_ID,
       inject: () => ({}),
     }, UsagePanel)),
-    'dsh-usage-billing: main panel',
+    'dsh-usage-billing-19pt: main panel',
   )
 
   // 左栏导航行：id 与上面 main 的 key 相同，点击即切换主列。
@@ -100,7 +100,7 @@ function apply(ctx) {
       order: 20,
       label: () => PANEL_LABEL,
     }, UsageBillingIcon)),
-    'dsh-usage-billing: sidebar entry',
+    'dsh-usage-billing-19pt: sidebar entry',
   )
 }
 

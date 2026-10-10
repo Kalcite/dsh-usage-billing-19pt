@@ -1,5 +1,5 @@
 {
-  "name": "dsh-usage-billing",
+  "name": "dsh-usage-billing-19pt",
   "version": "1.0.0",
   "description": "DeepSeek Harness 用量与计费插件 — 扫描会话日志统计 Token 消耗，按多模型单价与峰谷时段（北京时间）实时计费，提供费用总览、Token 构成、日历热力图、会话钻取等看板，单价与峰谷规则可在设置中实时调整。",
   "keywords": [

@@ -13,7 +13,7 @@
  *      这正是「导出后打开是乱码」这类反馈的来源。
  *   2. **CRLF 行尾 + RFC 4180 引号转义**，Excel / LibreOffice / pandas 都能直接读。
  *
- * @module dsh-usage-billing/src/export
+ * @module dsh-usage-billing-19pt/src/export
  */
 import type { UsageOverview } from './ledger.js';
 /** 支持的导出格式。 */

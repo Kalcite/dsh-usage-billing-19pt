@@ -644,7 +644,7 @@ const CARD_CATALOG = [
 ]
 
 /** 卡片选择的存储键。 */
-const CARD_STORAGE_KEY = 'dsh-usage-billing.cards'
+const CARD_STORAGE_KEY = 'dsh-usage-billing-19pt.cards'
 
 /** 默认显示的四张卡。 */
 const DEFAULT_CARD_KEYS = ['totalCost', 'totalTokens', 'todayCost', 'todayTokens']
@@ -1481,7 +1481,7 @@ function UsagePanel(props) {
               : '周末全天空闲（始终生效）')
             : '周末区分峰谷',
           h('br'),
-          '改单价 / 峰谷规则：设置 → 插件 → dsh-usage-billing。',        ),
+          '改单价 / 峰谷规则：设置 → 插件 → dsh-usage-billing-19pt。',        ),
       ),
     ),
 
